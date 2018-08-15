@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GraphService implements IService<GraphDTO> {
+public class GraphServiceImpl implements IService<GraphDTO> {
     @Autowired
     private GraphRepository graphRepository;
     @Autowired

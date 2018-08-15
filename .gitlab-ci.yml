@@ -1,0 +1,9 @@
+image: maven:3-jdk-7
+
+maven_build:
+  stage: build
+  tags:
+  - maven
+  script:
+  - echo "Building project with maven"
+  - mvn install -B

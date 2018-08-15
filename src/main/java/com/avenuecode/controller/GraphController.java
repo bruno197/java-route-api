@@ -2,8 +2,7 @@ package com.avenuecode.controller;
 
 import com.avenuecode.model.GraphDTO;
 import com.avenuecode.model.RouteDTO;
-import com.avenuecode.service.graph.GraphService;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.avenuecode.service.graph.GraphServiceImpl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class GraphController {
 
     @Autowired
-    private GraphService graphService;
+    private GraphServiceImpl graphServiceImpl;
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes="application/json")
     @ResponseStatus(HttpStatus.CREATED)
@@ -31,7 +30,7 @@ public class GraphController {
             System.out.println(g.getDistance());
         }
 
-        return ResponseEntity.ok(objectMapper.writeValueAsString(graphService.saveOrUpdate(graphDTO)));
+        return ResponseEntity.ok(objectMapper.writeValueAsString(graphServiceImpl.saveOrUpdate(graphDTO)));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -39,7 +38,7 @@ public class GraphController {
     public ResponseEntity<?> getGraphById(@PathVariable("id") Long id) {
         ObjectMapper objectMapper =  new ObjectMapper();
         try {
-            return ResponseEntity.ok(objectMapper.writeValueAsString(graphService.getById(id)));
+            return ResponseEntity.ok(objectMapper.writeValueAsString(graphServiceImpl.getById(id)));
         } catch (Exception e) {
             throw new OrderNotFoundException();
         }
